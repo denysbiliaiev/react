@@ -1,0 +1,70 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://fb.me/react-0.13.1.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.13.1.js"></script>
+</head>
+
+<body>
+    <div id="app"/>
+
+    <script type="text/jsx;harmony=true">
+
+      var App = React.createClass({
+          getInitialState: function() {
+            return {
+                cost1: 1,
+                clicks: 0
+            }
+          },
+
+          inputChange: function() {
+              this.setState({
+                  cost1: this.refs.cost1.refs.range.getDOMNode().value,
+              })
+          },
+
+          clickButton: function() {
+             this.setState({
+                 clicks: this.state.clicks + 1
+             });
+          },
+
+          render: function() {
+              return (
+                   <div>
+                       <BButton className="btn btn-primary" click={this.clickButton}> {this.state.clicks} </BButton>
+                       <BInput ref="cost1" type="range" min="0" max="20" change={this.inputChange}/>
+                       {this.state.cost1}
+                   </div>
+              )
+          }
+      });
+
+      var BButton = React.createClass({
+          render: function() {
+              return (
+                   <div>
+                       <a className={this.props.className} onClick={this.props.click}>{this.props.children}</a>
+                   </div>
+              )
+          }
+      });
+
+      var BInput = React.createClass({
+          render: function() {
+              var {change, ...other} = this.props;
+              return (
+                  <div>
+                      <input ref="range" {...other} onChange={change} ></input>
+                  </div>
+              )
+          }
+      });
+
+      React.render(<App/>, document.getElementById('app'));
+
+    </script>
+</body>
+
+</html>
