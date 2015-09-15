@@ -6,64 +6,32 @@
 </head>
 
 <body>
-    <div id="app"/>
+    <script type="text/jsx">
 
-    <script type="text/jsx;harmony=true">
+        var App = React.createClass({
+            getInitialState: function() {
+                return {myModel: new myBackboneModel({items: [1, 2, 3]})};
+            },
 
-      var App = React.createClass({
-          getInitialState: function() {
-            return {
-                cost1: 1,
-                clicks: 0
+            componentDidMount: function() {
+                $(React.findDOMNode(this.refs.placeholder)).append($('<span />'));
+            },
+
+            componentWillUnmount: function() {
+                // Clean up work here.
+            },
+
+            shouldComponentUpdate: function() {
+                // Let's just never update this component again.
+                return false;
+            },
+
+            render: function() {
+                return <div ref="placeholder"/>;
             }
-          },
+        });
 
-          inputChange: function() {
-              this.setState({
-                  cost1: this.refs.cost1.refs.range.getDOMNode().value,
-              })
-          },
-
-          clickButton: function() {
-             this.setState({
-                 clicks: this.state.clicks + 1
-             });
-          },
-
-          render: function() {
-              return (
-                   <div>
-                       <BButton className="btn btn-primary" click={this.clickButton}> {this.state.clicks} </BButton>
-                       <BInput ref="cost1" type="range" min="0" max="20" change={this.inputChange}/>
-                       {this.state.cost1}
-                   </div>
-              )
-          }
-      });
-
-      var BButton = React.createClass({
-          render: function() {
-              return (
-                   <div>
-                       <a className={this.props.className} onClick={this.props.click}>{this.props.children}</a>
-                   </div>
-              )
-          }
-      });
-
-      var BInput = React.createClass({
-          render: function() {
-              var {change, ...other} = this.props;
-              return (
-                  <div>
-                      <input ref="range" {...other} onChange={change} ></input>
-                  </div>
-              )
-          }
-      });
-
-      React.render(<App/>, document.getElementById('app'));
-
+        React.render(<App />, document.body);
     </script>
 </body>
 
