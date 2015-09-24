@@ -1,38 +1,63 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="http://fb.me/react-0.13.1.js"></script>
-    <script src="http://fb.me/JSXTransformer-0.13.1.js"></script>
+    <script src="https://fb.me/react-with-addons-0.13.3.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.13.3.js"></script>
+    <!-- ?????????? ????? Mocha, ??? ??????????? ??????????? -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css">
+    <!-- ?????????? ?????????? Mocha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.js"></script>
+    <!-- ?????????? chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
 </head>
 
 <body>
-    <script type="text/jsx">
+<div id="mocha"></div>
 
-        var App = React.createClass({
-            getInitialState: function() {
-                return {myModel: new myBackboneModel({items: [1, 2, 3]})};
-            },
-
-            componentDidMount: function() {
-                $(React.findDOMNode(this.refs.placeholder)).append($('<span />'));
-            },
-
-            componentWillUnmount: function() {
-                // Clean up work here.
-            },
-
-            shouldComponentUpdate: function() {
-                // Let's just never update this component again.
-                return false;
-            },
-
-            render: function() {
-                return <div ref="placeholder"/>;
+<script type="text/jsx">
+    var TestButton  =  React.createClass ({
+        getInitialState: function () {
+            return {
+                val: 0
             }
-        });
+        },
 
-        React.render(<App />, document.body);
-    </script>
+        inc: function () {
+            this.setState({val: this.state.val + 1});
+        },
+
+        dec: function () {
+            this.setState({val: this.state.val - 1});
+        },
+
+        render: function() {
+            return (
+                <div>
+                    <button ref="dec" onClick={this.dec}>-</button>
+                    <span ref="val">{this.state.val}</span>
+                    <button ref="inc" onClick={this.inc}>+</button>
+                </div>
+            )
+        }
+    });
+
+    var test = React.addons.TestUtils;
+
+    mocha.setup('bdd');
+    chai.should();
+
+    describe('TestButton', function() {
+        it('test element testButton', function(done){
+            var testButton = test.renderIntoDocument(<TestButton />);
+            test.Simulate.click(testButton.refs.inc.getDOMNode());
+            testButton.state.val.should.equal(1);
+            done();
+        });
+    });
+
+    mocha.run();
+
+</script>
 </body>
 
 </html>
