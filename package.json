@@ -1,0 +1,8 @@
+{
+  "clean": "rm -rf lib",
+  "watch-js": "./node_modules/.bin/babel src -d lib --experimental -w",
+  "dev-server": "node lib/server/webpack",
+  "server": "nodemon lib/server/server",
+  "start": "npm run watch-js & npm run dev-server & npm run server",
+  "build": "npm run clean && ./node_modules/.bin/babel src -d lib --experimental"
+}
