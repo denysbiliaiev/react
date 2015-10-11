@@ -1,30 +1,32 @@
-//require('node-jsx-babel').install({extension: '.jsx'})//extension: '.coffee'
-//require("node-jsx").install();
-require('babel/register');//.es6, .es, .jsx, .js
-
 var express = require('express');
-var path = require('path');
-
-var React = require('react');
-//var Router = require('react-router');
-//var routes = require('./public/routes');
-var ReactDOMServer  = require('react-dom/server');
-
 var app = express();
+console.log(__dirname);
+app.use('/', express.static(__dirname + '/public'));
+app.use('/assets', express.static(__dirname + '/assets'));
 
-app.set('view engine', 'jade')
-app.set('views', path.join(__dirname, '/views'));
-app.use(express.static(path.join(__dirname, './public')));
+var server = app.listen(3000);
 
-var Com = React.createFactory(require('./public/components/app'));
 
-app.get('/', function(req, res) {
-    //Router.run(routes, req.url, function(Handler) {
-        var content = ReactDOMServer.renderToStaticMarkup(Com());
-        res.render('index', {content: content});
-    //});
-});
+//import express from "express";
+//import React from "react";
+//import Router from "react-router";
+//const app = express();
 
-app.listen(3000, function() {
-    console.log('listen');
-})
+// set up Jade
+//app.set('views', './views');
+//app.set('view engine', 'jade');
+//import routes from "src/shared/routes";
+//
+//app.get('/*', function (req, res) {
+//    Router.run(routes, req.url, Handler => {
+//        let content = React.renderToString(<Handler />);
+//        res.render('index', { content: content });
+//    });
+//});
+//
+//var server = app.listen(3000, function () {
+//    var host = server.address().address;
+//    var port = server.address().port;
+//
+//    console.log('Example app listening at http://%s:%s', host, port);
+//});
