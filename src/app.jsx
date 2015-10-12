@@ -1,9 +1,11 @@
 var React = require('react');
-module.exports = React.createClass({displayName: 'Toolbar',
+require('jquery');
+
+module.exports = React.createClass({
     render: function () {
         return (
             <div>
-                <button>Button 1</button>
+                <button className="btn btn-success">React comp</button>
             </div>
         );
     }

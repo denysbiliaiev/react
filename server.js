@@ -1,9 +1,11 @@
 var express = require('express');
 var app = express();
-console.log(__dirname);
-app.use('/', express.static(__dirname + '/public'));
-app.use('/assets', express.static(__dirname + '/assets'));
 
-var server = app.listen(3000);
+app.use('/', express.static(__dirname + '/public'));
+app.use('/build', express.static(__dirname + '/build'));
+
+var server = app.listen(3000, function() {
+    console.log("server 3000");
+});
 
 

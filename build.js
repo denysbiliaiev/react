@@ -1,8 +1,10 @@
+var path = require('path');
 var webpack = require('webpack');
 
 var config = require('./webpack.config');
 var compiler = webpack(config);
 
 compiler.run(function () {
-    console.log(stats.toJson()); // по завершению, выводим всю статистику
+    console.log('build');
+    console.log(stats.toJson());
 });
