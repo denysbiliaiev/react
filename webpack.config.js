@@ -36,7 +36,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin("styles.css"),
         new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify('production')
+            'NODE_ENV': JSON.stringify('development')
         }),
         new BowerWebpackPlugin({
             modulesDirectories: ['bower_components'],

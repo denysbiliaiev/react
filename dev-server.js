@@ -14,9 +14,8 @@ var devServer = new WebpackDevServer(
     {
         contentBase: __dirname + '/public',
         publicPath: '/build/',
-        colors: true,
-        inline: true,
-        //hot: true,
+        hot: true,
+        stats: { colors: true },
     }
 ).listen(8088, 'localhost');
 
