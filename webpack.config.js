@@ -1,13 +1,13 @@
 var webpack = require('webpack');
 module.exports = {
-    entry: [
-        'webpack/hot/dev-server',
-        "./js/app.js"
-    ],
+    entry: {
+        point1:['webpack/hot/dev-server', "./js/app.js"],
+        point2: "./js/test.js",
+    },
     output: {
         path: __dirname + '/build',
         publicPath: '/HMR_path/',
-        filename: "bundle.js",
+        filename: "[name].bundle.js",
         //chunkFilename: "[id].bundle.js"
     },
     module: {
