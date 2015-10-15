@@ -1,25 +1,27 @@
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = {
-    entry: {
-        point1:['webpack/hot/dev-server', "./js/app.js"],
-        point2: "./js/test.js",
-    },
+    entry: ['webpack/hot/dev-server', "./js/app"],
     output: {
-        path: __dirname + '/build',
-        publicPath: '/HMR_path/',
-        filename: "[name].bundle.js",
-        //chunkFilename: "[id].bundle.js"
+        path: __dirname + 'build/js/',
+        filename: "bundle.js",
+        publicPath: '/public/assets/js/',
     },
     module: {
+        //preLoaders: [
+        //    { test: /\.js$/, loader: 'jshint-loader', exclude: /node_modules/ }
+        //],
         loaders: [
-            { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+            { test: [/\.js?$/, /\.jsx$/, /\.es6$/], loaders: ['react-hot', 'babel-loader'], exclude: /node_modules/ },
             { test: /\.css$/, loader: "style!css" }
         ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
-    ]
-
+    ],
+    resolve: {
+        extensions: ['', '.js', '.jsx', '.es6']
+    },
 };

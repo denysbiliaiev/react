@@ -7,8 +7,8 @@ var config = require('./webpack.config');
 var compiler = webpack(config);
 
 var server = new WebpackDevServer(compiler, {
-    contentBase: __dirname + '/',
-    publicPath: '/HMR_path/',
+    contentBase: __dirname + '/public',
+    publicPath: '/public/assets/js/',
     colors: true,
     hot: true,
     inline: true,
