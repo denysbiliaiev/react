@@ -8,7 +8,7 @@ var compiler = webpack(config);
 
 var server = new WebpackDevServer(compiler, {
     contentBase: __dirname + '/public',
-    publicPath: '/public/assets/',
+    publicPath: '/public/assets',
     colors: true,
     hot: true,
     inline: true,

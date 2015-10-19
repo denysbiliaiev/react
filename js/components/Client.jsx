@@ -1,4 +1,5 @@
 import React from 'react';
+import ImgC from 'react-image-component';
 
 let Client = React.createClass({
 
@@ -6,7 +7,7 @@ let Client = React.createClass({
         return(
             <div>
                 <h1>Client</h1>
-                <img src={"../../images/react_flux.png"} className="img-responsive"></img>
+                <ImgC src={"react.png"} aspectRatio={0.1} />
             </div>
         );
     }

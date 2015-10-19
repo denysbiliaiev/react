@@ -9,6 +9,14 @@ require('../css/app.css');
 require('../css/main.scss');
 require('../css/main1.less');
 
+var img = document.createElement('img');
+
+img.style.width = '25%';
+img.style.height = '25%';
+img.src = require('../images/react.png');
+
+document.getElementById('simg').appendChild(img);
+
 let App = React.createClass({
     render() {
         return (
@@ -19,7 +27,6 @@ let App = React.createClass({
                     <Link to="client">Client</Link>
                 </div>
                 <div className="container">
-                    <img src={'../images/react.png'}></img>
                     <RouteHandler/>
                 </div>
             </div>
