@@ -2,7 +2,9 @@ var webdriverio = require('webdriverio');
 
 var options = {
     desiredCapabilities: {
-        browserName: 'firefox'
+        browserName: 'firefox',
+        applicationCacheEnabled: false,
+        //addCustomRequestHeaders: true,
     },
     //proxy: 'proxy.hostopia.com:3128',
 };
@@ -14,9 +16,10 @@ function test1() {
     webdriverio
         .remote(options)
         .init()
+        .windowHandleSize({width: 803, height: 680})
         .url('http://kaktusfresh.wix.com/lifedev')
         .pause(3000)
-        this.click('#comp-ifwowzublink')
+        .click('#comp-ifwowzublink')
         .pause(19000)
         .isExisting('div .image-container a img').then(function(isExisting) {
             if (isExisting) {
@@ -43,6 +46,7 @@ function test2() {
         .remote(options)
         .init()
         .url('http://merchteam1.wix.com/travel-world')
+        .windowHandleSize({width: 801, height: 675})
         .pause(5000)
         .click('#DrpDwnMn02bg')
         .pause(7000)
