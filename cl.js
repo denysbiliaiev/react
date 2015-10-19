@@ -7,16 +7,20 @@ var options = {
     //proxy: 'proxy.hostopia.com:3128',
 };
 
-for (var i=1; i <10; i++) {
+function YouTube() {
     webdriverio
         .remote(options)
         .init()
         .url('http://kaktusfresh.wix.com/lifedev')
         .pause(2000)
-        .click('#comp-ifwowzublink')
-        .pause(240000)
+        .click('#comp-ifyevskjlabel')
+        .pause(120000)
         .title(function (err, res) {
             console.log('Title was: ' + res);
         })
-        .end();
+        .end()
+        .pause(5000);
+//    setTimeout(YouTube, 5000);
 }
+
+setInterval(YouTube, 5000);
