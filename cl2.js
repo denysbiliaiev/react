@@ -11,8 +11,10 @@ var options = {
 
 var i = 0;
 var r = 0;
+var timeout = 20000;
 
 function test1() {
+
     webdriverio
         .remote(options)
         .init()
@@ -27,7 +29,7 @@ function test1() {
                 this.click('div .image-container a img')
             }
         })
-        .pause(100000)
+        .pause(25000)
         .title(function (err, res) {
             console.log('ERR: ' + err);
             console.log('RESULT: ' + res);
@@ -36,12 +38,23 @@ function test1() {
         })
         .end()
 
-        i++
-        setTimeout(test1, 50000);
+        if (i < 500) {
+            timeout -= 200;
+        } else {
+            timeout += 120;
+        }
+        console.log('timeout_1: ' + timeout);
+
+        if (i < 900) {
+            setTimeout(test1, timeout);
+            i++
+        }
+
 }
 
 
 function test2() {
+
     webdriverio
         .remote(options)
         .init()
@@ -58,7 +71,7 @@ function test2() {
                 this.click('div .image-container a img')
             }
         })
-        .pause(100000)
+        .pause(30000)
         .title(function (err, res) {
             console.log('ERR: ' + err);
             console.log('RESULT: ' + res);
@@ -67,8 +80,17 @@ function test2() {
         })
         .end()
 
-         i++
-         setTimeout(test2, 50000);
+        if (i < 300) {
+            timeout -= 100;
+        } else {
+            timeout += 130;
+        }
+        console.log('timeout_2: ' + timeout);
+
+        if (i < 700) {
+            setTimeout(test2, timeout);
+            i++
+    }
 }
 
 test1();
