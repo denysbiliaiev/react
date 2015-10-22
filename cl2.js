@@ -11,7 +11,7 @@ var options = {
 
 var i = 0;
 var r = 0;
-var timeout = 20000;
+var timeout = 40000;
 
 function test1() {
 
