@@ -48,8 +48,9 @@ profile.addExtension(path.resolve(__dirname, 'extensions/modify_headers.xpi'), f
         //???????? IP ??????? ??????????: 193.46.86.0 - 193.46.86.255
 
         //driver.get('http://www.seogadget.ru/myip');
-        driver.get('http://rassanov.ru/web-tools/my-IP.htm');
+//        driver.get('http://rassanov.ru/web-tools/my-IP.htm');
 
+        driver.get('http://kaktusfresh.wix.com/lifedev');
 
         //driver.findElement(By.name('q')).sendKeys('webdriver');
         //driver.findElement(By.name('btnG')).click();
