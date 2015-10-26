@@ -41,7 +41,12 @@ module.exports = {
         //        warnings: false
         //    }
         //}),
-        //new webpack.NoErrorsPlugin()
+        //new webpack.ProvidePlugin({
+        //    $: 'jquery',
+        //    jQuery: 'jquery',
+        //    'window.jQuery': 'jquery'
+        //}),
+        new webpack.NoErrorsPlugin()
     ],
     resolve: {
         extensions: ['', '.js', '.jsx', '.es6']
