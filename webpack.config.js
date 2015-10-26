@@ -3,25 +3,42 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: ['webpack/hot/dev-server', "./js/app"],
+    entry: {
+        main: ['webpack/hot/dev-server', path.resolve(__dirname, 'src/main.jsx')],
+        menu: ['webpack/hot/dev-server', path.resolve(__dirname, 'src/menu.jsx')],
+        shop: ['webpack/hot/dev-server', path.resolve(__dirname, 'src/shop.jsx')],
+        chat: ['webpack/hot/dev-server', path.resolve(__dirname, 'src/chat.jsx')],
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: "bundle.js",
-        publicPath: '/public/assets/',
+        filename: "[name].js",
+        publicPath: 'public/assets/',
     },
     module: {
-        //preLoaders: [
-        //    { test: /\.js$/, loader: 'jshint-loader', exclude: /node_modules/ }
-        //],
         loaders: [
-            {test: [/\.(jsx|js|es6)$/], loaders: ['react-hot', 'babel-loader'], exclude: /node_modules/},
-            {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader"), exclude: /node_modules/},
-            {test: /\.scss$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!sass-loader"), exclude: /node_modules/},
-            {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!less-loader"), exclude: /node_modules/},
             {
-              test: /\.json$/,
-              loader: 'json-loader!' + path.resolve('loaders/json'),
-              exclude:/node_modules/
+                test: [/\.(jsx|js|es6)$/],
+                loaders: ['react-hot', 'babel-loader'],
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader"),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!sass-loader"),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!autoprefixer-loader!less-loader"),
+                exclude: /node_modules/},
+            {
+                test: /\.json$/,
+                loader: 'json-loader!' + path.resolve('loaders/json'),
+                exclude:/node_modules/
             },
             {
                 test: /\.(png|jpg|ttf|eot|svg|woff)$/,
@@ -32,10 +49,13 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin("styles.css"),
+        new webpack.optimize.CommonsChunkPlugin('common.js'),
         new webpack.HotModuleReplacementPlugin(),
-        //new webpack.DefinePlugin({
-        //    'NODE_ENV': JSON.stringify('production')
-        //}),
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+            __PRERELEASE__: JSON.stringify(JSON.parse(process.env.BUILD_PRERELEASE || 'false'))
+            //'NODE_ENV': JSON.stringify('development')
+        }),
         //new webpack.optimize.UglifyJsPlugin({
         //    compress: {
         //        warnings: false
@@ -51,4 +71,12 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx', '.es6']
     },
+
+    //devServer: {
+    //    contentBase: __dirname + '/public',
+    //    publicPath: '/public/assets',
+    //    colors: true,
+    //    hot: true,
+    //    inline: true,
+    //}
 };
